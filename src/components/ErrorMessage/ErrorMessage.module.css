@@ -1,0 +1,8 @@
+.div {
+display: flex;
+font-size: 14px;
+gap: 5px;
+align-items: center;
+justify-content: center;
+
+}

@@ -1,0 +1,15 @@
+.ul {
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.li {
+
+    display: flex;
+    gap: 5px;
+    justify-content: flex-start;
+
+}
