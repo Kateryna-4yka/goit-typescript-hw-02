@@ -9,10 +9,9 @@ import Loader from '../Loader/Loader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage'; 
 import ImageModal from '../ImageModal/ImageModal'; 
 
-import requestOnUnsplsh from '../../articles-api';
+import requestOnUnsplsh, { ImgArr } from '../../articles-api';
 
 import css from './App.module.css';
-
 
 import Modal from 'react-modal';
 Modal.setAppElement('#root');
@@ -20,22 +19,22 @@ Modal.setAppElement('#root');
 
 export default function App() {
 // ===============================================================форма передає слово для пошуку 
-const [searchWord, setSearchWord] = useState (''); 
+const [searchWord, setSearchWord] = useState<string>(''); 
 
-const handleSetSearchWord =(nowWord) =>{
+const handleSetSearchWord =(nowWord:string) :void =>{
   setSearchWord (nowWord);
   setPage(1);
   setRequestInfo([]);
 };
 
 // ===============================================================запит на сервер
-const [page, setPage] = useState (1);
+const [page, setPage] = useState <number>(1);
 
-const [loading, setLoading] = useState(false);
+const [loading, setLoading] = useState<boolean>(false);
 
-const [er, setEr] = useState (false);
+const [er, setEr] = useState <boolean>(false);
 
-const [requestInfo, setRequestInfo] = useState ([]);
+const [requestInfo, setRequestInfo] = useState <ImgArr []>([]);
 
 useEffect (()=>{
 
@@ -46,13 +45,13 @@ if (searchWord.length <1 ) {return}
   setLoading(true);
   setEr(false);
     try { 
-      const resoltFech = await requestOnUnsplsh (searchWord, page);
-      setRequestInfo (prevState=>{return [...prevState, ...resoltFech]});
-    
+      const resoltFech: ImgArr[] = await requestOnUnsplsh (searchWord, page);
+      setRequestInfo (prevState=>  {return [...prevState, ...resoltFech]});
+
     if (resoltFech.length<1) {toast('Nothing was found for your query', {
       style: {
-        shadow: '0px 3px 3px rgba(168, 156, 142, 0.842)',
         color: 'rgba(88, 72, 52, 0.84)',
+        boxShadow: '0px 3px 3px rgba(168, 156, 142, 0.842)',
         background: 'rgba(235, 222, 208, 0.64)',
         padding: '5px 10px',
         fontSize: '12px',
@@ -67,16 +66,17 @@ if (searchWord.length <1 ) {return}
 
   // ==============================функція модального вікна
 
-  const [modal, setModal] = useState(null);
-  const [modalInfo, setModalInfo] = useState([]);
+  const [modal, setModal] = useState<boolean>(false);
+  const [modalInfo, setModalInfo] = useState<ImgArr | null > (null);
 
-    const handelsetModalInfo =(el)=>{
+    const handelsetModalInfo =(el: ImgArr) :void =>{
+
       setModalInfo(el);
       setModal(true);
     }
 
-    const closeModal = () => {
-      setModal(null);
+    const closeModal = () :void => {
+      setModal(false);
       setModalInfo(null);
     };
 
@@ -94,7 +94,7 @@ if (searchWord.length <1 ) {return}
       {requestInfo.length>0 && !loading && <LoadMoreBtn onClick = {()=>{setPage(page+1);}} />}
 
         
-      {modal && <ImageModal el={modalInfo} openModal={modal} closeModal={closeModal} />}
+      {modal && modalInfo && (<ImageModal el={modalInfo} openModal={modal} closeModal={closeModal} />)}
 </>)
 }
 

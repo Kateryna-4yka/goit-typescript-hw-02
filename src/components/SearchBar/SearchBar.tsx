@@ -1,18 +1,25 @@
 import toast, { Toaster } from 'react-hot-toast';
 import { GiMagnifyingGlass } from "react-icons/gi";
 import css from './SearchBar.module.css';
+import { FormEvent } from 'react';
 
-export default function SearchBar ({onSubmit}) {
+interface SearchBarProps {
+  onSubmit: (nowWord:string)  => void, 
+}
 
-const handleSubmitForm =(event)=> {
+
+export default function SearchBar ({onSubmit}: SearchBarProps) {
+
+const handleSubmitForm =(event: FormEvent<HTMLFormElement>)=> {
 
     event.preventDefault();
 
-    const word =(event.target.elements.search.value).trim().toLowerCase();
+    const form = event.currentTarget;
+    const word = (form.elements.namedItem('search') as HTMLInputElement).value.trim().toLowerCase();
 
     if (word === '' ) {return toast('Enter text to search for image', {
         style: {
-          shadow: '0px 3px 3px rgba(168, 156, 142, 0.842)',
+          boxShadow: '0px 3px 3px rgba(168, 156, 142, 0.842)',
           color: 'rgba(88, 72, 52, 0.84)',
           background: 'rgba(235, 222, 208, 0.64)',
           padding: '5px 10px',
@@ -21,7 +28,7 @@ const handleSubmitForm =(event)=> {
     
     onSubmit(word);
 
-    event.target.reset();
+    form.reset();
 }
 
 
