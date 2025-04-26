@@ -1,13 +1,6 @@
-import { ImgArr } from '../../articles-api';
 import css from './ImageModal.module.css';
 import Modal from 'react-modal';
-
-
-interface ImageModalProps {
-  el: ImgArr | null,
-  openModal: boolean,
-  closeModal: () => void,
-}
+import ImageModalProps from './ImageModal.types';
 
 export default function ImageModal ({el, openModal, closeModal}: ImageModalProps) {
   if (!el) return null;

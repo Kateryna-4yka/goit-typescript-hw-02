@@ -1,12 +1,7 @@
-import { ImgArr } from '../../articles-api';
 import ImageCard from '../ImageCard/ImageCard';
 import css from './ImageGallery.module.css';
+import ImageGalleryProps from './ImageGallery.types';
 
-
-interface ImageGalleryProps {
-    requestInfoFromApp: ImgArr[],
-    handelsetModalInfo: (el: ImgArr) => void,
-}
 
 export default function ImageGallery ({requestInfoFromApp, handelsetModalInfo}: ImageGalleryProps) {
 

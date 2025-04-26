@@ -1,11 +1,5 @@
-import { ImgArr } from '../../articles-api';
 import css from './ImageCard.module.css';
-
-
-interface ImageCardProps {
-  el: ImgArr,
-  handelsetModalInfo: (el: ImgArr) => void,
-}
+import ImageCardProps from './ImageCard.types';
 
 
 export default function ImageCard ({el, handelsetModalInfo}: ImageCardProps) {

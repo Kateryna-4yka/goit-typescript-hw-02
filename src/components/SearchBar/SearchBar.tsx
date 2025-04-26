@@ -2,10 +2,8 @@ import toast, { Toaster } from 'react-hot-toast';
 import { GiMagnifyingGlass } from "react-icons/gi";
 import css from './SearchBar.module.css';
 import { FormEvent } from 'react';
+import SearchBarProps from './SearchBar.types';
 
-interface SearchBarProps {
-  onSubmit: (nowWord:string)  => void, 
-}
 
 
 export default function SearchBar ({onSubmit}: SearchBarProps) {
